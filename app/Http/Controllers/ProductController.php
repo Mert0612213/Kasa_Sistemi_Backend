@@ -68,4 +68,25 @@ class ProductController extends Controller
 
         return response()->json($product);
     }
+
+    /**
+     * DELETE /products/{barcode} -> delete product by barcode
+     */
+    public function destroy(string $barcode)
+    {
+        $product = Product::where('barcode', $barcode)->first();
+        if (! $product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        try {
+            $product->delete();
+            return response()->json(['message' => 'Deleted'], 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Delete failed',
+                'error' => $e->getMessage(),
+            ], 409);
+        }
+    }
 }

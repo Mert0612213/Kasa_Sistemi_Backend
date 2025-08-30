@@ -18,3 +18,4 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{barcode}', [ProductController::class, 'show']);
 Route::post('/products', [ProductController::class, 'store']);
 Route::put('/products/{barcode}', [ProductController::class, 'update']);
+Route::delete('/products/{barcode}', [ProductController::class, 'destroy']);
